@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <UserSecretsId>aspnet-SenderApp-D29D9C14-BFB5-4721-AAD7-A64EB794ACF6</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <LangVersion>latestmajor</LangVersion>
+        <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.10" />
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="LOGS" />
+      <Folder Include="Services\AutoMapperService" />
+      <Folder Include="wwwroot\REPORTS" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Core.Abstractions\Core.Abstractions.csproj" />
+      <ProjectReference Include="..\Core.AppIdentity\Core.AppIdentity.csproj" />
+      <ProjectReference Include="..\NugetPackages.Identity\NugetPackages.Identity.csproj" />
+      <ProjectReference Include="..\NugetPackages.MailKit\NugetPackages.MailKit.csproj" />
+      <ProjectReference Include="..\NugetPackages.Mapper\NugetPackages.Mapper.csproj" />
+      <ProjectReference Include="..\NugetPackages.MySqlProvider\NugetPackages.MySqlProvider.csproj" />
+      <ProjectReference Include="..\NugetPackages.Quartz\NugetPackages.Quartz.csproj" />
+      <ProjectReference Include="..\NugetPackages.RazorEngine.Template\NugetPackages.RazorEngine.Template.csproj" />
+      <ProjectReference Include="..\NugetPackages.Serilog\NugetPackages.Serilog.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Services\ReportService\ReportTemplates\UserAuthentificationTemplate.cshtml" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Update="wwwroot\TEMPLATES\UserAuthReportTemplate.cshtml">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\TEMPLATES\UserAuthTemplate.cshtml">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="..\.dockerignore">
+        <DependentUpon>Dockerfile</DependentUpon>
+        <Link>Services\QuartzService\.dockerignore</Link>
+      </None>
+    </ItemGroup>
+
+</Project>

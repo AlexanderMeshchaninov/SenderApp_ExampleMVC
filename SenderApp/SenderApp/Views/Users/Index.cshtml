@@ -1,0 +1,33 @@
+@model IEnumerable<Core.AppIdentity.Models.CustomIdentityUser>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Users profile</h1>
+@if (User.IsInRole("admin") || User.IsInRole("sa"))
+{
+    <hr/>
+    <p>
+        <a asp-action="Create">Add new user</a>
+    </p>
+}
+
+<table class="table">
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.Email</td>
+            <td>
+                <form asp-action="Delete" asp-route-id="@user.Id" method="post">
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@user.Id">Edit info</a> 
+                    <a class="btn btn-sm btn-primary" asp-action="ChangePassword" asp-route-id="@user.Id">Change password</a> 
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+<div>
+    <a asp-action="Edit">Back to List</a>
+</div>

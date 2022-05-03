@@ -1,0 +1,27 @@
+@using Microsoft.AspNetCore.Identity
+@model SenderApp.Models.ViewModels.ChangeUserRole.ChangeRoleViewModel
+
+<h1>Change role for - @Model.UserEmail</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="UserId" value="@Model.UserId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @foreach (var role in Model.AllRoles)
+                {
+                    <input type="checkbox" name="roles" value="@role.Name"
+                           @(Model.UserRoles.Contains(role.Name) ? "checked=\"checked\"" : "") />@role.Name <br/>
+                }
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="UserList">Back to List</a>
+</div>

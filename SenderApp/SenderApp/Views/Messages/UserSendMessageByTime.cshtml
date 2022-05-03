@@ -1,0 +1,47 @@
+@model SenderApp.Models.ViewModels.SendMessagesUser.UserMessageViewModel
+@{
+    ViewData["Title"] = "Write message by time";
+}
+<h1>Send message to - @Model.Email</h1>
+<hr />
+<form asp-action="SendMessageByTime" asp-controller="Messages">
+    <div asp-validation-summary="All" class="text-danger"></div>
+ 
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="Email" />
+    
+    <div class="form-group">
+        <label asp-for="Template" class="control-label">Choose template</label>
+        <select asp-for="Template" data-val="true" class="form-control">
+            <option value="UserMessageHappyNewYearTemplate">Happy New Year</option>
+            <option value="UserMessageHappyBirthdayTemplate">Happy Birthday</option>
+            <option value="UserCustomMessageTemplate">Custom message</option>
+        </select>
+    </div>
+    
+    <hr />
+    
+    <div class="form-group">
+        <label asp-for="SendingMessageTime" class="control-label"><b>Send message by time</b></label>
+        <input asp-for="SendingMessageTime" class="form-control"/>
+    </div>
+    
+    <div class="form-group">
+        <input asp-for="IsSendingMessageBySpecificTime" type="checkbox" checked="checked"><label><b> Add message</b></label>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Message" class="control-label"><b>Send message now</b></label>
+        <textarea type="text" asp-for="Message" class="form-control"></textarea>
+    </div>
+    
+    <div class="form-group">
+        <form method="post" asp-controller="Messages" asp-action="SendMessageByTime">
+            <input type="submit" value="Add" class="btn btn-primary"/>
+        </form>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

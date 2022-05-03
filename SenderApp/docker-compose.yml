@@ -1,0 +1,50 @@
+version: '3.4'
+
+services:
+  senderapp:
+    image: senderapp:latest
+    container_name: senderapp
+    build:
+      context: .
+      dockerfile: SenderApp/Dockerfile
+    restart: always
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_URLS=http://+:80
+    ports:
+        - "5000:80"
+    volumes:
+        - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+        - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    networks:
+        - senderapp
+
+  mysql:
+    image: mysql:8.0.29
+    container_name: mysql
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: test333
+      MYSQL_DATABASE: senderidentitydb
+    ports:
+      - "3306:3306"
+    volumes:
+      - datafiles:/var/lib/mysql
+    networks:
+        - senderapp
+
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+        - senderapp
+
+networks:
+    senderapp:
+        driver: bridge
+volumes:
+    datafiles:

@@ -1,0 +1,19 @@
+@model IEnumerable<Core.AppIdentity.Models.CustomIdentityUser>
+ 
+<h1>List of users</h1>
+
+<table class="table">
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.Email</td>
+            <td>
+                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-userid="@user.Id">ACCESS</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

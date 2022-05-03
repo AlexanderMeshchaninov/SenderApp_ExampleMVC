@@ -1,0 +1,78 @@
+﻿@model List<Core.AppIdentity.Models.CustomIdentityUser>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">SenderApp</h1>
+    
+    @if (User.Identity.IsAuthenticated)
+    {
+        @if(User.IsInRole("user"))
+        {
+            <p>Welcome - @User.Identity.Name</p>
+            <hr />                 
+            <form method="post" asp-controller="Account" asp-action="Logout">
+                <input type="submit" value="Logout" class="btn btn-primary"/>
+            </form>
+            
+            <p></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut nibh vitae est sagittis pellentesque. 
+                Suspendisse tempus, leo in lacinia pulvinar, purus elit interdum enim, sit amet pulvinar ligula ligula 
+                nec orci. Nunc auctor vestibulum erat a posuere. Suspendisse lobortis sem gravida dolor porttitor, sed 
+                cursus purus faucibus. Praesent in odio maximus ipsum vestibulum ultrices eget eget erat. Praesent 
+                consectetur posuere pellentesque. Quisque et eros eu nunc porta tristique id id dui. Praesent sagittis, 
+                est a vehicula commodo, mauris dolor ultrices erat, egestas mattis nulla dolor in ligula. Nullam lorem 
+                purus, facilisis vitae risus non, facilisis dignissim ante. Cras et nunc eget leo posuere facilisis eu 
+                in metus.
+            </p>
+            <p>Suspendisse efficitur tempus lacus et cursus. Orci varius natoque penatibus et magnis dis parturient 
+                montes, nascetur ridiculus mus. Mauris iaculis nibh eget metus pharetra suscipit. Integer at ornare mi. 
+                Quisque sit amet metus nisl. Pellentesque aliquet sem non felis venenatis, a ullamcorper magna 
+                scelerisque. Sed viverra lacinia mi, non aliquet lacus volutpat aliquam. Praesent suscipit odio sed 
+                nulla sodales lobortis. Duis ullamcorper volutpat suscipit. Nunc eu nulla eu tellus ultricies aliquet. 
+                Nulla eget massa in elit luctus tincidunt. Nullam sagittis urna vitae eros gravida efficitur. Cras vel 
+                turpis vitae lorem vehicula tincidunt. Sed sollicitudin sapien bibendum tortor imperdiet facilisis.
+            </p>
+            <p>Aliquam et rutrum orci. Nullam tortor mauris, porta ac aliquet non, finibus ut velit. Nullam dignissim 
+                molestie mi, vel posuere tortor. Sed ut velit mi. Duis sed orci ultrices eros convallis fringilla. 
+                Suspendisse quis lacus tincidunt, lobortis nisi vel, fringilla ligula. Morbi tincidunt suscipit egestas. 
+                Pellentesque vulputate ultricies neque eu lacinia. Fusce at turpis sodales, bibendum arcu vitae, porta 
+                nunc. Fusce auctor, orci sed sodales fringilla, sapien velit lacinia felis, vel ornare diam tellus eget 
+                nibh. Praesent mollis lacinia consequat. Duis eu augue quis enim aliquet hendrerit. Vestibulum 
+                consectetur, libero sed accumsan fringilla, sem eros sollicitudin dui, placerat dapibus massa tortor 
+                non libero.
+            </p>
+        }
+        @if (User.IsInRole("admin") || (User.IsInRole("sa")))
+        {
+            <p>Welcome our Dear Administrator - @User.Identity.Name</p>
+            <hr />                      
+            <form method="post" asp-controller="Account" asp-action="Logout">
+                <input type="submit" value="Logout" class="btn btn-primary"/>
+            </form>
+            
+            <p></p>
+            <p>RULE THIS WORLD!</p> 
+        }
+        @if (User.IsInRole("manager"))
+        {
+            <p>Welcome our Manager - @User.Identity.Name</p>
+            <hr />
+            <form method="post" asp-controller="Account" asp-action="Logout">
+                <input type="submit" value="Logout" class="btn btn-primary"/>
+            </form>
+            
+            <p></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut nibh vitae est sagittis pellentesque. 
+                Suspendisse tempus, leo in lacinia pulvinar, purus elit interdum enim, sit amet pulvinar ligula ligula 
+                nec orci. Nunc auctor vestibulum erat a posuere. Suspendisse lobortis sem gravida dolor porttitor, sed 
+                cursus purus faucibus. Praesent in odio maximus ipsum vestibulum ultrices eget eget erat. Praesent 
+                consectetur posuere pellentesque. Quisque et eros eu nunc porta tristique id id dui. Praesent sagittis, 
+                est a vehicula commodo, mauris dolor ultrices erat, egestas mattis nulla dolor in ligula. Nullam lorem 
+                purus, facilisis vitae risus non, facilisis dignissim ante. Cras et nunc eget leo posuere facilisis eu 
+                in metus.
+            </p>
+        }
+    }
+</div>
